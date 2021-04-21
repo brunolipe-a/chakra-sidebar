@@ -37,7 +37,7 @@ export function SideBar() {
             <DrawerBody as={Flex} direction="column" p={6}>
               <UserMenu />
               <Nav pt={8} />
-              <NavFooter />
+              <NavFooter mt={8} />
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
@@ -59,7 +59,7 @@ export function SideBar() {
     >
       <Logo />
       <Nav pt={6} />
-      <NavFooter />
+      <NavFooter mt={6} />
     </Flex>
   )
 }
