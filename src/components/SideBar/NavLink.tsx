@@ -1,12 +1,12 @@
 import { ThemeTypings, Flex, Box, Link } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+import { ReactElement } from 'react'
 
 interface NavLinkProps {
   to: string
   children: string
-  icon: ReactNode
+  icon: ReactElement
   dotColor?: ThemeTypings['colors']
 }
 

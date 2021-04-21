@@ -7,9 +7,9 @@ import {
   Box,
 } from '@chakra-ui/react'
 import { BiMenu } from 'react-icons/bi'
+import { useLayout } from '../context/LayoutContext'
 import { useSidebarDrawer } from '../context/SidebarDrawerContext'
 
-import { Logo } from './Logo'
 import { UserMenu } from './SideBar/UserMenu'
 
 function SidebarButton() {
@@ -38,6 +38,7 @@ function SidebarButton() {
 }
 
 export function Header() {
+  const { Logo } = useLayout()
   const isMobileHeader = useBreakpointValue({ base: true, lg: false })
 
   return (

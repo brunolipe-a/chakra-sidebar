@@ -12,10 +12,11 @@ import {
 import { UserMenu } from './UserMenu'
 import { Nav } from './Nav'
 import { NavFooter } from './NavFooter'
-import { Logo } from '../Logo'
 import { useSidebarDrawer } from '../../context/SidebarDrawerContext'
+import { useLayout } from '../../context/LayoutContext'
 
 export function SideBar() {
+  const { Logo } = useLayout()
   const isDrawerSideBar = useBreakpointValue({ base: true, lg: false })
 
   const { isOpen, onClose } = useSidebarDrawer()

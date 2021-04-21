@@ -21,3 +21,4 @@ export default function Pages() {
 }
 
 Pages.Layout = MainLayout
+Pages.pageTitle = 'Pages'

@@ -17,3 +17,4 @@ export default function Home() {
 }
 
 Home.Layout = MainLayout
+Home.pageTitle = 'Home'

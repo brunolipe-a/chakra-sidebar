@@ -1,17 +1,23 @@
-import { BiCog, BiBuoy } from 'react-icons/bi'
+import { Stack, StackProps } from '@chakra-ui/react'
+import { useLayout } from '../../context/LayoutContext'
 
 import { NavGroup } from './NavGroup'
 import { NavLink } from './NavLink'
 
-export function NavFooter() {
+export function NavFooter({ ...rest }: StackProps) {
+  const { menuFooter } = useLayout()
+
   return (
-    <NavGroup color="gray.400" mt={12}>
-      <NavLink to="/settings" icon={<BiCog />}>
-        Settings
-      </NavLink>
-      <NavLink to="/support" icon={<BiBuoy />} dotColor="pink.500">
-        Help & Support
-      </NavLink>
-    </NavGroup>
+    <Stack spacing={8} {...rest}>
+      {menuFooter?.map(({ items, title }, index) => (
+        <NavGroup key={index} title={title}>
+          {items.map(({ icon: Icon, text, url }) => (
+            <NavLink key={url} to={url} icon={<Icon />}>
+              {text}
+            </NavLink>
+          ))}
+        </NavGroup>
+      ))}
+    </Stack>
   )
 }

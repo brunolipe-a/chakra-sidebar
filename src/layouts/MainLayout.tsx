@@ -1,4 +1,5 @@
 import { ReactNode } from 'react'
+import Head from 'next/head'
 import { Box, BoxProps, Flex } from '@chakra-ui/react'
 
 import { SidebarDrawerProvider } from '../context/SidebarDrawerContext'
@@ -6,13 +7,25 @@ import { SidebarDrawerProvider } from '../context/SidebarDrawerContext'
 import { Header } from '../components/Header'
 import { SideBar } from '../components/SideBar'
 
+import { useLayout } from '../context/LayoutContext'
+
 interface MainLayoutProps extends BoxProps {
   children: ReactNode
+  pageTitle?: string
 }
 
-export function MainLayout({ children, ...rest }: MainLayoutProps) {
+export function MainLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
+  const { title, titlePrefix, titlePosfix } = useLayout()
+
   return (
     <SidebarDrawerProvider>
+      <Head>
+        <title>
+          {titlePrefix}
+          {title || pageTitle}
+          {titlePosfix}
+        </title>
+      </Head>
       <Box h="100vh" overflow="hidden" pos="relative">
         <Flex h="full">
           <SideBar />

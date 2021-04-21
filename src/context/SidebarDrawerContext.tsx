@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { useContext } from 'react'
 import { createContext, ReactNode } from 'react'
 
-interface SidebarDrawerProviderProps {
+interface SidebarDrawerProps {
   children: ReactNode
 }
 
@@ -12,9 +12,7 @@ type SidebarDrawerContextData = UseDisclosureReturn
 
 const SidebarDrawerContext = createContext({} as SidebarDrawerContextData)
 
-export function SidebarDrawerProvider({
-  children,
-}: SidebarDrawerProviderProps) {
+export function SidebarDrawerProvider({ children }: SidebarDrawerProps) {
   const disclosure = useDisclosure()
   const { asPath } = useRouter()
 

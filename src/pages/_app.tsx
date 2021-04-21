@@ -1,20 +1,21 @@
 import { FC } from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
 
-import theme from '../styles/theme'
 import { AppProps } from 'next/app'
+
+import { AppProvider } from '../context'
 
 const Noop: FC = ({ children }) => <>{children}</>
 
 function MyApp({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop
+  const pageTitle = (Component as any).pageTitle
 
   return (
-    <ChakraProvider resetCSS theme={theme}>
-      <Layout>
+    <AppProvider>
+      <Layout pageTitle={pageTitle}>
         <Component {...pageProps} />
       </Layout>
-    </ChakraProvider>
+    </AppProvider>
   )
 }
 
