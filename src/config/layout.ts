@@ -16,13 +16,13 @@ import { Logo } from '../components/Logo'
 const layout: LayoutConfig = {
   Logo,
   titlePrefix: 'dashgo | ',
-  dashbordUrl: '/home',
+  dashbordUrl: '/',
   menu: [
     {
       items: [
         {
           text: 'Get Started',
-          url: '/home',
+          url: '/',
           icon: BiHome,
         },
         {
