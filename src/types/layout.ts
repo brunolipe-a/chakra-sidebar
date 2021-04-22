@@ -1,9 +1,14 @@
 import { ElementType } from 'react'
+import { Actions, Subjects } from './ability'
 
-export type NavItem = {
+type NavItem = {
   text: string
   url: string
   icon: ElementType
+  can?: {
+    action: Actions
+    subject: Subjects
+  }
 }
 
 export type NavGroupItems = {

@@ -10,7 +10,7 @@ import { BiMenu } from 'react-icons/bi'
 import { useLayout } from '../context/LayoutContext'
 import { useSidebarDrawer } from '../context/SidebarDrawerContext'
 
-import { UserMenu } from './SideBar/UserMenu'
+import { UserMenu } from './UserMenu'
 
 function SidebarButton() {
   const { onOpen } = useSidebarDrawer()

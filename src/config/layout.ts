@@ -29,6 +29,7 @@ const layout: LayoutConfig = {
           text: 'Inbox',
           url: '/inbox',
           icon: BiCommentAdd,
+          can: { action: 'create', subject: 'Article' },
         },
       ],
     },

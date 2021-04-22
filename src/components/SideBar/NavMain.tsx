@@ -3,8 +3,8 @@ import { useLayout } from '../../context/LayoutContext'
 
 import { NavItems } from './NavItems'
 
-export function NavFooter({ ...rest }: StackProps) {
-  const { menuFooter } = useLayout()
+export function NavMain({ ...rest }: StackProps) {
+  const { menu } = useLayout()
 
-  return <NavItems menu={menuFooter} {...rest} />
+  return <NavItems menu={menu} flex={1} {...rest} />
 }

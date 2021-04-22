@@ -1,5 +1,6 @@
 import { Center, Text } from '@chakra-ui/react'
 import { MainLayout } from '../layouts/MainLayout'
+import { Can } from '../context/AbilityContext'
 
 export default function Home() {
   return (
@@ -10,8 +11,12 @@ export default function Home() {
       borderWidth="3px"
       borderStyle="dashed"
       borderColor="gray.200"
+      flexDirection="column"
     >
       <Text>home</Text>
+      <Can I="read" an="Article">
+        <Text>🎉 Eu posso ver! 🎉</Text>
+      </Can>
     </Center>
   )
 }

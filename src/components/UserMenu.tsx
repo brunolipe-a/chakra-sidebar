@@ -13,11 +13,27 @@ import {
   MenuProps,
 } from '@chakra-ui/react'
 
-import { MenuButton } from '../MenuButton'
+import { MenuButton } from './MenuButton'
 
 import { BiChevronDown } from 'react-icons/bi'
+import { useAbility } from '../context/AbilityContext'
 
 export function UserMenu({ ...rest }: Omit<MenuProps, 'children'>) {
+  const ability = useAbility()
+
+  function handleUpdate() {
+    ability.update([
+      {
+        action: ['create', 'read'],
+        subject: 'Article',
+      },
+    ])
+  }
+
+  function handleRemove() {
+    ability.update([])
+  }
+
   return (
     <Menu matchWidth placement="bottom-end" {...rest}>
       <MenuButton
@@ -72,8 +88,12 @@ export function UserMenu({ ...rest }: Omit<MenuProps, 'children'>) {
           </MenuItemOption>
         </MenuOptionGroup>
         <MenuDivider />
-        <MenuItem borderRadius="md">Workspace settings</MenuItem>
-        <MenuItem borderRadius="md">Add an account</MenuItem>
+        <MenuItem borderRadius="md" onClick={handleUpdate}>
+          Adicionar permissões
+        </MenuItem>
+        <MenuItem borderRadius="md" onClick={handleRemove}>
+          Remover permissões
+        </MenuItem>
         <MenuDivider />
         <MenuItem borderRadius="md">Logout</MenuItem>
       </MenuList>

@@ -6,6 +6,7 @@ import theme from '../styles/theme'
 import layout from '../config/layout'
 
 import { LayoutProvider } from './LayoutContext'
+import { AbilityProvider } from './AbilityContext'
 
 interface AppProviderProps {
   children: ReactNode
@@ -14,7 +15,9 @@ interface AppProviderProps {
 export function AppProvider({ children }: AppProviderProps) {
   return (
     <ChakraProvider resetCSS theme={theme}>
-      <LayoutProvider config={layout}>{children}</LayoutProvider>
+      <AbilityProvider>
+        <LayoutProvider config={layout}>{children}</LayoutProvider>
+      </AbilityProvider>
     </ChakraProvider>
   )
 }

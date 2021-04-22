@@ -9,8 +9,8 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 
-import { UserMenu } from './UserMenu'
-import { Nav } from './Nav'
+import { UserMenu } from '../UserMenu'
+import { NavMain } from './NavMain'
 import { NavFooter } from './NavFooter'
 import { useSidebarDrawer } from '../../context/SidebarDrawerContext'
 import { useLayout } from '../../context/LayoutContext'
@@ -36,8 +36,8 @@ export function SideBar() {
             </DrawerHeader>
             <DrawerBody as={Flex} direction="column" p={6}>
               <UserMenu />
-              <Nav pt={8} />
-              <NavFooter mt={8} />
+              <NavMain pt={6} />
+              <NavFooter mt={6} />
             </DrawerBody>
           </DrawerContent>
         </DrawerOverlay>
@@ -58,8 +58,8 @@ export function SideBar() {
       zIndex="overlay"
     >
       <Logo />
-      <Nav pt={6} />
-      <NavFooter mt={6} />
+      <NavMain pt={8} />
+      <NavFooter mt={8} />
     </Flex>
   )
 }
