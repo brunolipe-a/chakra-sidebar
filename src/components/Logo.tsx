@@ -6,7 +6,8 @@ interface LogoProps extends BoxProps {
   canRedirect?: boolean
 }
 
-export function Logo({ canRedirect = true, ...rest }: LogoProps) {
+export function Logo({ canRedirect = true, fontSize, ...rest }: LogoProps) {
+  const { title } = useLayout()
   const { push } = useRouter()
   const { dashbordUrl } = useLayout()
 
@@ -17,15 +18,14 @@ export function Logo({ canRedirect = true, ...rest }: LogoProps) {
   }
 
   return (
-    <Box cursor="pointer" onClick={handleRedirect} {...rest}>
+    <Box cursor="pointer" onClick={handleRedirect} px={2} {...rest}>
       <Text
-        fontSize={['2xl', '3xl']}
+        fontSize={fontSize || ['3xl', '4xl']}
         fontWeight="bold"
         letterSpacing="tight"
-        px={2}
       >
-        dashgo
-        <Text as="span" ml={1} color="pink.500">
+        {title}
+        <Text as="span" ml={1} color="teal.500">
           .
         </Text>
       </Text>

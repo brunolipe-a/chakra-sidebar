@@ -19,7 +19,7 @@ function SidebarButton() {
     <Box pos="relative">
       <Badge
         position="absolute"
-        bg="pink.500"
+        bg="teal.500"
         boxSize="2"
         rounded="full"
         right={1.5}
@@ -48,7 +48,6 @@ export function Header() {
       align="center"
       bg="gray.800"
       boxShadow="xl"
-      color="whiteAlpha.800"
       px={[6, 8]}
       justify={{ base: 'space-between', lg: 'flex-end' }}
     >

@@ -11,6 +11,7 @@ import {
   MenuDivider,
   Image,
   MenuProps,
+  useColorModeValue as mode,
 } from '@chakra-ui/react'
 
 import { MenuButton } from './MenuButton'
@@ -40,7 +41,6 @@ export function UserMenu({ ...rest }: Omit<MenuProps, 'children'>) {
         as={Button}
         borderRadius="lg"
         bg="gray.700"
-        px={3}
         py={2}
         fontSize="sm"
         cursor="pointer"
@@ -71,7 +71,12 @@ export function UserMenu({ ...rest }: Omit<MenuProps, 'children'>) {
           <BiChevronDown />
         </Box>
       </MenuButton>
-      <MenuList color="gray.600" boxShadow="lg" py={4} px={3}>
+      <MenuList
+        color={mode('gray.600', 'whiteAlpha.900')}
+        boxShadow="lg"
+        py={4}
+        px={3}
+      >
         <Text mb={2} fontWeight="medium">
           @brunolipe-a
         </Text>

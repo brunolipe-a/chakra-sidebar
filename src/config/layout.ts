@@ -15,7 +15,8 @@ import { Logo } from '../components/Logo'
 
 const layout: LayoutConfig = {
   Logo,
-  titlePrefix: 'dashgo | ',
+  title: 'dashgo',
+  titleSeparator: ' | ',
   dashbordUrl: '/',
   menu: [
     {

@@ -15,21 +15,21 @@ interface MainLayoutProps extends BoxProps {
 }
 
 export function MainLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
-  const { title, titlePrefix, titlePosfix } = useLayout()
+  const { title, titleSeparator } = useLayout()
 
   return (
     <SidebarDrawerProvider>
       <Head>
         <title>
-          {titlePrefix}
-          {title || pageTitle}
-          {titlePosfix}
+          {title}
+          {pageTitle && titleSeparator}
+          {pageTitle}
         </title>
       </Head>
       <Box h="100vh" overflow="hidden" pos="relative">
         <Flex h="full">
           <SideBar />
-          <Flex bg="white" flex={1} direction="column">
+          <Flex flex={1} direction="column">
             <Header />
             <Box flex={1} p={6} overflow="auto" {...rest}>
               {children}

@@ -21,7 +21,6 @@ export type LayoutConfig = {
   menu?: NavGroupItems[]
   menuFooter?: NavGroupItems[]
   title?: string
-  titlePrefix?: string
-  titlePosfix?: string
+  titleSeparator?: string
   dashbordUrl: string
 }
