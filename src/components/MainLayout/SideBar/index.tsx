@@ -9,11 +9,11 @@ import {
   useBreakpointValue,
 } from '@chakra-ui/react'
 
-import { UserMenu } from '../UserMenu'
+import { UserMenu } from '../../MainLayout/UserMenu'
 import { NavMain } from './NavMain'
 import { NavFooter } from './NavFooter'
-import { useSidebarDrawer } from '../../context/SidebarDrawerContext'
-import { useLayout } from '../../context/LayoutContext'
+import { useSidebarDrawer } from '../../../context/SidebarDrawerContext'
+import { useLayout } from '../../../context/LayoutContext'
 
 export function SideBar() {
   const { Logo } = useLayout()

@@ -7,8 +7,8 @@ import {
   Box,
 } from '@chakra-ui/react'
 import { BiMenu } from 'react-icons/bi'
-import { useLayout } from '../context/LayoutContext'
-import { useSidebarDrawer } from '../context/SidebarDrawerContext'
+import { useLayout } from '../../context/LayoutContext'
+import { useSidebarDrawer } from '../../context/SidebarDrawerContext'
 
 import { UserMenu } from './UserMenu'
 

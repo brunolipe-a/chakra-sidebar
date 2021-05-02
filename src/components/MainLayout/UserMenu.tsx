@@ -17,7 +17,7 @@ import {
 import { MenuButton } from './MenuButton'
 
 import { BiChevronDown } from 'react-icons/bi'
-import { useAbility } from '../context/AbilityContext'
+import { useAbility } from '../../context/AbilityContext'
 
 export function UserMenu({ ...rest }: Omit<MenuProps, 'children'>) {
   const ability = useAbility()

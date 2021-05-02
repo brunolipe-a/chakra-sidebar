@@ -4,8 +4,8 @@ import { Box, BoxProps, Flex } from '@chakra-ui/react'
 
 import { SidebarDrawerProvider } from '../context/SidebarDrawerContext'
 
-import { Header } from '../components/Header'
-import { SideBar } from '../components/SideBar'
+import { Header } from '../components/MainLayout/Header'
+import { SideBar } from '../components/MainLayout/SideBar'
 
 import { useLayout } from '../context/LayoutContext'
 
