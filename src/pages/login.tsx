@@ -11,9 +11,16 @@ import {
 
 import { Input } from '../components/Form/Input'
 import { PasswordInput } from '../components/Form/PasswordInput'
+import { useAuth } from '../context/AuthContext'
 import { AuthLayout } from '../layouts/AuthLayout'
 
 export default function Login() {
+  const { signIn } = useAuth()
+
+  async function handleSubmit() {
+    signIn({ email: 'foo@bar.com', password: '123456' })
+  }
+
   return (
     <>
       <Text mt={5} color="gray.500" fontSize="lg">
@@ -30,7 +37,7 @@ export default function Login() {
             </Checkbox>
           </Flex>
         </Stack>
-        <Button colorScheme="teal" size="lg">
+        <Button colorScheme="teal" size="lg" onClick={handleSubmit}>
           Login
         </Button>
         <Flex>

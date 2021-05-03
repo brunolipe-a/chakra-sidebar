@@ -7,6 +7,7 @@ import layout from '../config/layout'
 
 import { LayoutProvider } from './LayoutContext'
 import { AbilityProvider } from './AbilityContext'
+import { AuthProvider } from './AuthContext'
 
 interface AppProviderProps {
   children: ReactNode
@@ -16,7 +17,9 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <AbilityProvider>
-        <LayoutProvider config={layout}>{children}</LayoutProvider>
+        <AuthProvider>
+          <LayoutProvider config={layout}>{children}</LayoutProvider>
+        </AuthProvider>
       </AbilityProvider>
     </ChakraProvider>
   )

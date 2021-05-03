@@ -27,14 +27,14 @@ export function MainLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
         </title>
       </Head>
       <Box h="100vh" overflow="hidden" pos="relative">
-        <Flex h="full">
-          <SideBar />
+        <Flex h="full" direction="row-reverse">
           <Flex flex={1} direction="column">
             <Header />
             <Box flex={1} p={6} overflow="auto" {...rest}>
               {children}
             </Box>
           </Flex>
+          <SideBar />
         </Flex>
       </Box>
     </SidebarDrawerProvider>
