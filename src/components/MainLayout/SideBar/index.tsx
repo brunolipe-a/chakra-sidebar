@@ -7,6 +7,7 @@ import {
   DrawerOverlay,
   Flex,
   useBreakpointValue,
+  useColorModeValue as mode,
 } from '@chakra-ui/react'
 
 import { UserMenu } from '../../MainLayout/UserMenu'
@@ -14,8 +15,9 @@ import { NavMain } from './NavMain'
 import { NavFooter } from './NavFooter'
 import { useSidebarDrawer } from '../../../context/SidebarDrawerContext'
 import { useLayout } from '../../../context/LayoutContext'
+import { memo } from 'react'
 
-export function SideBar() {
+function SideBarComponent() {
   const { Logo } = useLayout()
   const isDrawerSideBar = useBreakpointValue({ base: true, lg: false })
 
@@ -25,7 +27,10 @@ export function SideBar() {
     return (
       <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
         <DrawerOverlay>
-          <DrawerContent bg="gray.900" color="white">
+          <DrawerContent
+            bg={mode('white', 'gray.900')}
+            color={mode('gray.700', 'whiteAlpha.900')}
+          >
             <DrawerHeader
               d="flex"
               alignItems="center"
@@ -35,7 +40,7 @@ export function SideBar() {
               <DrawerCloseButton position="unset" />
             </DrawerHeader>
             <DrawerBody as={Flex} direction="column" p={6}>
-              <UserMenu />
+              <UserMenu reverseDir />
               <NavMain pt={6} />
               <NavFooter mt={6} />
             </DrawerBody>
@@ -51,11 +56,11 @@ export function SideBar() {
       direction="column"
       p={4}
       w={64}
-      bg="gray.900"
-      color="white"
+      bg={mode('white', 'gray.900')}
       fontSize="sm"
       overflow="auto"
-      zIndex="overlay"
+      color={mode('gray.700', 'whiteAlpha.900')}
+      borderRightWidth={mode('1px', 0)}
     >
       <Logo />
       <NavMain pt={8} />
@@ -63,3 +68,5 @@ export function SideBar() {
     </Flex>
   )
 }
+
+export const SideBar = memo(SideBarComponent)

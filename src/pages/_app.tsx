@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <AppProvider>
       <NextNprogress
         color={theme.colors.teal[500]}
-        height={2}
+        height={3}
         options={{ showSpinner: false }}
       />
       <Layout pageTitle={pageTitle}>

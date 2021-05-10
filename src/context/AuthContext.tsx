@@ -1,8 +1,14 @@
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { useContext, createContext, ReactNode } from 'react'
+
+import Router from 'next/router'
+
 import { api } from '../services/api'
-import { UserData } from '../type/auth'
+import { UserData } from '../types/auth'
+import { useLayout } from './LayoutContext'
+import { useToast } from '@chakra-ui/react'
+import { Response, User } from '../types'
 
 interface AuthProps {
   children: ReactNode
@@ -11,7 +17,9 @@ interface AuthProps {
 type AuthContextData = {
   isAuthenticated: boolean
   isAuthLoading: boolean
+  user: User
   signIn(props: SignInProps): Promise<boolean>
+  signOut(): Promise<void>
 }
 
 type SignInProps = {
@@ -19,25 +27,40 @@ type SignInProps = {
   password: string
 }
 
+const TOKEN_KEY = '@cashgo:token'
+
 const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProps) {
+  const toast = useToast()
+  const { loginUrl } = useLayout()
+
+  const [user, setUser] = useState({} as User)
+
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAuthLoading, setIsAuthLoading] = useState(true)
 
   useEffect(() => {
-    const userData = JSON.parse(
-      localStorage.getItem('@dashgo:user')
-    ) as UserData | null
+    const token: string = JSON.parse(localStorage.getItem(TOKEN_KEY))
 
-    if (userData?.token) {
-      api.defaults.headers.authorization = `Bearer ${userData.token}`
+    if (token) {
+      api.defaults.headers.authorization = `Bearer ${token}`
 
       setIsAuthenticated(true)
     }
 
-    setIsAuthLoading(false)
+    setTimeout(() => {
+      setIsAuthLoading(false)
+    }, 500)
   }, [])
+
+  useEffect(() => {
+    if (isAuthenticated && !user.id) {
+      api.get<Response<User>>('me').then(({ data }) => {
+        setUser(data.data)
+      })
+    }
+  }, [isAuthenticated, user])
 
   async function signIn(credentials: SignInProps) {
     try {
@@ -48,7 +71,7 @@ export function AuthProvider({ children }: AuthProps) {
 
       api.defaults.headers.authorization = `Bearer ${data.token}`
 
-      localStorage.setItem('@dashgo:user', JSON.stringify(data))
+      localStorage.setItem(TOKEN_KEY, JSON.stringify(data.token))
 
       setIsAuthenticated(true)
 
@@ -58,12 +81,33 @@ export function AuthProvider({ children }: AuthProps) {
     }
   }
 
+  async function signOut() {
+    setIsAuthenticated(false)
+    setUser({} as User)
+    Router.push(loginUrl)
+
+    await api.delete('logout')
+
+    localStorage.removeItem(TOKEN_KEY)
+
+    toast({
+      title: 'Deslogado',
+      description: 'Você foi deslogado com sucesso.',
+      status: 'success',
+      position: 'top-right',
+      duration: 2000,
+      isClosable: true,
+    })
+  }
+
   return (
     <AuthContext.Provider
       value={{
+        user,
         isAuthLoading,
         isAuthenticated,
         signIn,
+        signOut,
       }}
     >
       {children}

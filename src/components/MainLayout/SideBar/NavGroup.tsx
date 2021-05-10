@@ -1,4 +1,5 @@
 import { BoxProps, Box, Text, Stack } from '@chakra-ui/react'
+import { memo } from 'react'
 import { ReactNode } from 'react'
 
 interface NavGroupProps extends BoxProps {
@@ -6,7 +7,7 @@ interface NavGroupProps extends BoxProps {
   title?: string
 }
 
-export function NavGroup({ children, title, ...rest }: NavGroupProps) {
+function NavGroupComponent({ children, title, ...rest }: NavGroupProps) {
   return (
     <Box {...rest}>
       {title && (
@@ -26,3 +27,5 @@ export function NavGroup({ children, title, ...rest }: NavGroupProps) {
     </Box>
   )
 }
+
+export const NavGroup = memo(NavGroupComponent)

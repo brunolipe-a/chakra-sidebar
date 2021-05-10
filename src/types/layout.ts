@@ -23,4 +23,5 @@ export type LayoutConfig = {
   title?: string
   titleSeparator?: string
   dashbordUrl: string
+  loginUrl: string
 }

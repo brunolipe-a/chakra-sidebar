@@ -8,6 +8,8 @@ import { Header } from '../components/MainLayout/Header'
 import { SideBar } from '../components/MainLayout/SideBar'
 
 import { useLayout } from '../context/LayoutContext'
+import { LoadingOverlay } from '../components/LoadingOverlay'
+import { useLoadingOverlay } from '../hooks/useLoadingOverlay'
 
 interface MainLayoutProps extends BoxProps {
   children: ReactNode
@@ -16,6 +18,13 @@ interface MainLayoutProps extends BoxProps {
 
 export function MainLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
   const { title, titleSeparator } = useLayout()
+  const { loginUrl } = useLayout()
+
+  const shouldShowLoading = useLoadingOverlay({ redirecURL: loginUrl })
+
+  if (shouldShowLoading) {
+    return <LoadingOverlay />
+  }
 
   return (
     <SidebarDrawerProvider>

@@ -1,12 +1,13 @@
 import { Text, Box, BoxProps } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import { memo } from 'react'
 import { useLayout } from '../context/LayoutContext'
 
 interface LogoProps extends BoxProps {
   canRedirect?: boolean
 }
 
-export function Logo({ canRedirect = true, fontSize, ...rest }: LogoProps) {
+function LogoComponent({ canRedirect = true, fontSize, ...rest }: LogoProps) {
   const { title } = useLayout()
   const { push } = useRouter()
   const { dashbordUrl } = useLayout()
@@ -18,7 +19,13 @@ export function Logo({ canRedirect = true, fontSize, ...rest }: LogoProps) {
   }
 
   return (
-    <Box cursor="pointer" onClick={handleRedirect} px={2} {...rest}>
+    <Box
+      cursor="pointer"
+      onClick={handleRedirect}
+      px={2}
+      userSelect="none"
+      {...rest}
+    >
       <Text
         fontSize={fontSize || ['3xl', '4xl']}
         fontWeight="bold"
@@ -32,3 +39,5 @@ export function Logo({ canRedirect = true, fontSize, ...rest }: LogoProps) {
     </Box>
   )
 }
+
+export const Logo = memo(LogoComponent)

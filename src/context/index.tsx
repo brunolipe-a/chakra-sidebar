@@ -17,9 +17,9 @@ export function AppProvider({ children }: AppProviderProps) {
   return (
     <ChakraProvider resetCSS theme={theme}>
       <AbilityProvider>
-        <AuthProvider>
-          <LayoutProvider config={layout}>{children}</LayoutProvider>
-        </AuthProvider>
+        <LayoutProvider config={layout}>
+          <AuthProvider>{children}</AuthProvider>
+        </LayoutProvider>
       </AbilityProvider>
     </ChakraProvider>
   )

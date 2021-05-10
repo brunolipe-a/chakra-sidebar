@@ -7,13 +7,13 @@ const theme = extendTheme<Theme>({
     body: 'Inter',
   },
   config: {
-    initialColorMode: 'dark',
-    useSystemColorMode: false,
+    initialColorMode: 'light',
+    useSystemColorMode: true,
   },
   styles: {
     global: (props) => ({
       body: {
-        bg: mode('gray.100', 'gray.800')(props),
+        bg: mode('white', 'gray.800')(props),
       },
       '::-webkit-scrollbar': {
         w: '0.4rem',

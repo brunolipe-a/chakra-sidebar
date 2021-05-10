@@ -1,7 +1,13 @@
-import { ThemeTypings, Flex, Box, Link } from '@chakra-ui/react'
+import {
+  ThemeTypings,
+  Flex,
+  Box,
+  Link,
+  useColorModeValue as mode,
+} from '@chakra-ui/react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactElement } from 'react'
+import { memo, ReactElement } from 'react'
 
 interface NavLinkProps {
   to: string
@@ -10,13 +16,10 @@ interface NavLinkProps {
   dotColor?: ThemeTypings['colors']
 }
 
-export function NavLink({
-  children,
-  icon,
-  dotColor,
-  to = 'opa',
-}: NavLinkProps) {
+function NavLinkComponent({ children, icon, dotColor, to }: NavLinkProps) {
   const { asPath } = useRouter()
+
+  const activeBg = mode('gray.200', 'gray.700')
 
   const isActive = to !== '/' ? asPath.startsWith(to) : asPath === to
 
@@ -24,21 +27,22 @@ export function NavLink({
     <NextLink passHref href={to}>
       <Flex
         as={Link}
-        bg={isActive ? 'gray.700' : 'inherit'}
-        _hover={{ bg: 'gray.700', textDecor: 'none' }}
+        bg={isActive ? activeBg : 'inherit'}
+        _hover={{ bg: activeBg, textDecor: 'none' }}
         py={2}
         px={3}
         borderRadius="md"
         cursor="pointer"
-        _active={{ bg: 'gray.600' }}
+        _active={{ bg: activeBg, textDecor: 'none' }}
         align="center"
         userSelect="none"
         transition="all 0.2s ease 0s"
+        color={mode('gray.700', 'inherit')}
       >
         <Box
           fontSize="lg"
           lineHeight="base"
-          color={isActive ? 'inherit' : 'gray.400'}
+          color={mode('gray.500', 'inherit')}
         >
           {icon}
         </Box>
@@ -50,3 +54,5 @@ export function NavLink({
     </NextLink>
   )
 }
+
+export const NavLink = memo(NavLinkComponent)

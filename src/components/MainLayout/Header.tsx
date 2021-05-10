@@ -5,7 +5,9 @@ import {
   Icon,
   Badge,
   Box,
+  useColorModeValue as mode,
 } from '@chakra-ui/react'
+import { memo } from 'react'
 import { BiMenu } from 'react-icons/bi'
 import { useLayout } from '../../context/LayoutContext'
 import { useSidebarDrawer } from '../../context/SidebarDrawerContext'
@@ -37,7 +39,7 @@ function SidebarButton() {
   )
 }
 
-export function Header() {
+function HeaderComponent() {
   const { Logo } = useLayout()
   const isMobileHeader = useBreakpointValue({ base: true, lg: false })
 
@@ -46,8 +48,8 @@ export function Header() {
       as="header"
       h={{ base: 16, lg: 20 }}
       align="center"
-      bg="gray.800"
-      boxShadow="xl"
+      bg={mode('white', 'gray.800')}
+      boxShadow={mode('base', 'xl')}
       px={[6, 8]}
       justify={{ base: 'space-between', lg: 'flex-end' }}
     >
@@ -57,3 +59,5 @@ export function Header() {
     </Flex>
   )
 }
+
+export const Header = memo(HeaderComponent)

@@ -7,7 +7,7 @@ import {
   Heading,
   Text,
   Stack,
-  useColorModeValue as mode,
+  useColorModeValue,
   chakra,
   BoxProps,
 } from '@chakra-ui/react'
@@ -19,13 +19,26 @@ const ChakraShape = chakra(Shape)
 const ChakraIlustration = chakra(Ilustration)
 
 import { Logo } from '../components/Logo'
+import { LoadingOverlay } from '../components/LoadingOverlay'
+import { useLoadingOverlay } from '../hooks/useLoadingOverlay'
 
 interface MainLayoutProps extends BoxProps {
   pageTitle?: string
 }
 
 export function AuthLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
-  const { title, titleSeparator } = useLayout()
+  const { title, titleSeparator, dashbordUrl } = useLayout()
+
+  const copyrightColor = useColorModeValue('gray.400', 'gray.600')
+
+  const shouldShowLoading = useLoadingOverlay({
+    isGuest: true,
+    redirecURL: dashbordUrl,
+  })
+
+  if (shouldShowLoading) {
+    return <LoadingOverlay />
+  }
 
   return (
     <>
@@ -37,7 +50,6 @@ export function AuthLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
         </title>
       </Head>
       <Flex
-        bg={mode('white', 'inherit')}
         as="main"
         minH="100vh"
         overflow="hidden"
@@ -67,7 +79,7 @@ export function AuthLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
               fontWeight="semibold"
               fontSize="xs"
               mt="auto"
-              color={mode('gray.400', 'gray.600')}
+              color={copyrightColor}
             >
               © 2020 SagaTech Brasil Todos os Direitos Reservados
             </Text>
@@ -76,7 +88,7 @@ export function AuthLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
         <Flex
           as="aside"
           overflowY="auto"
-          flex="1"
+          flex="0.95"
           bg="teal.500"
           position="relative"
           direction="column"

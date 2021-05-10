@@ -18,7 +18,7 @@ export default function Login() {
   const { signIn } = useAuth()
 
   async function handleSubmit() {
-    signIn({ email: 'foo@bar.com', password: '123456' })
+    signIn({ email: 'admin@admin.com', password: '123456' })
   }
 
   return (
