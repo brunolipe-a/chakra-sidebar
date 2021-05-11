@@ -1,6 +1,6 @@
+import { memo, ReactNode } from 'react'
+
 import { BoxProps, Box, Text, Stack } from '@chakra-ui/react'
-import { memo } from 'react'
-import { ReactNode } from 'react'
 
 interface NavGroupProps extends BoxProps {
   children: ReactNode

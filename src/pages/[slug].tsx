@@ -1,6 +1,8 @@
 import { Center, Text } from '@chakra-ui/react'
+
 import { useRouter } from 'next/router'
-import { MainLayout } from '../layouts/MainLayout'
+
+import { MainLayout } from '~/layouts/MainLayout'
 
 export default function Pages() {
   const router = useRouter()

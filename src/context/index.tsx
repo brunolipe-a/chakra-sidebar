@@ -2,12 +2,12 @@ import { ReactNode } from 'react'
 
 import { ChakraProvider } from '@chakra-ui/react'
 
-import theme from '../styles/theme'
-import layout from '../config/layout'
+import layout from '~/config/layout'
+import theme from '~/styles/theme'
 
-import { LayoutProvider } from './LayoutContext'
 import { AbilityProvider } from './AbilityContext'
 import { AuthProvider } from './AuthContext'
+import { LayoutProvider } from './LayoutContext'
 
 interface AppProviderProps {
   children: ReactNode

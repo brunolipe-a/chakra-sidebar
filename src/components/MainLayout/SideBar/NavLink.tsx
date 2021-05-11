@@ -1,13 +1,15 @@
+import { memo, ReactElement } from 'react'
+
 import {
   ThemeTypings,
   Flex,
   Box,
   Link,
-  useColorModeValue as mode,
+  useColorModeValue as mode
 } from '@chakra-ui/react'
+
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { memo, ReactElement } from 'react'
 
 interface NavLinkProps {
   to: string

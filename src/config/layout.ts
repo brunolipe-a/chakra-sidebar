@@ -6,15 +6,15 @@ import {
   BiNews,
   BiPurchaseTagAlt,
   BiCog,
-  BiBuoy,
+  BiBuoy
 } from 'react-icons/bi'
 
-import { LayoutConfig } from '../types/layout'
+import { Logo } from '~/components/Logo'
 
-import { Logo } from '../components/Logo'
+import { LayoutConfig } from '~/types/layout'
 
 const layout: LayoutConfig = {
-  Logo,
+  Logo: Logo,
   title: 'cashgo',
   titleSeparator: ' | ',
   dashbordUrl: '/',
@@ -25,15 +25,15 @@ const layout: LayoutConfig = {
         {
           text: 'Get Started',
           url: '/',
-          icon: BiHome,
+          icon: BiHome
         },
         {
           text: 'Inbox',
           url: '/inbox',
           icon: BiCommentAdd,
-          can: { action: 'create', subject: 'Article' },
-        },
-      ],
+          can: { action: 'create', subject: 'categories' }
+        }
+      ]
     },
     {
       title: 'Your Business',
@@ -41,14 +41,14 @@ const layout: LayoutConfig = {
         {
           text: 'Transactions',
           url: '/transacitons',
-          icon: BiCreditCard,
+          icon: BiCreditCard
         },
         {
           text: 'Customers',
           url: '/customers',
-          icon: BiUserCircle,
-        },
-      ],
+          icon: BiUserCircle
+        }
+      ]
     },
     {
       title: 'Seller Tools',
@@ -56,15 +56,15 @@ const layout: LayoutConfig = {
         {
           text: 'Payment Pages',
           url: '/payment',
-          icon: BiNews,
+          icon: BiNews
         },
         {
           text: 'Plans',
           url: '/plans',
-          icon: BiPurchaseTagAlt,
-        },
-      ],
-    },
+          icon: BiPurchaseTagAlt
+        }
+      ]
+    }
   ],
   menuFooter: [
     {
@@ -72,16 +72,16 @@ const layout: LayoutConfig = {
         {
           text: 'Settings',
           url: '/settings',
-          icon: BiCog,
+          icon: BiCog
         },
         {
           text: 'Help & Support',
           url: '/support',
-          icon: BiBuoy,
-        },
-      ],
-    },
-  ],
+          icon: BiBuoy
+        }
+      ]
+    }
+  ]
 }
 
 export default layout

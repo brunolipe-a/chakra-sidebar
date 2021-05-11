@@ -7,7 +7,7 @@ import {
   Input as ChakraInput,
   InputProps as ChakraInputProps,
   FormErrorMessage,
-  FormHelperText,
+  FormHelperText
 } from '@chakra-ui/react'
 
 export interface InputProps extends ChakraInputProps {

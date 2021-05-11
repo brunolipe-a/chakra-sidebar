@@ -1,4 +1,5 @@
 import { Center, useColorModeValue, Spinner } from '@chakra-ui/react'
+
 import { Logo } from './Logo'
 
 export function LoadingOverlay() {

@@ -4,27 +4,27 @@ import { mode } from '@chakra-ui/theme-tools'
 const theme = extendTheme<Theme>({
   fonts: {
     heading: 'Inter',
-    body: 'Inter',
+    body: 'Inter'
   },
   config: {
     initialColorMode: 'light',
-    useSystemColorMode: true,
+    useSystemColorMode: false
   },
   styles: {
-    global: (props) => ({
+    global: props => ({
       body: {
-        bg: mode('white', 'gray.800')(props),
+        bg: mode('white', 'gray.800')(props)
       },
       '::-webkit-scrollbar': {
         w: '0.4rem',
-        h: '0.6rem',
+        h: '0.6rem'
       },
       '::-webkit-scrollbar-thumb': {
-        bg: 'gray.600',
-        borderRadius: 'full',
-      },
-    }),
-  },
+        bg: mode('gray.300', 'gray.600')(props),
+        borderRadius: 'full'
+      }
+    })
+  }
 })
 
 export default theme as Theme

@@ -1,11 +1,12 @@
 import { FC } from 'react'
 
 import { AppProps } from 'next/app'
-
+import Head from 'next/head'
 import NextNprogress from 'nextjs-progressbar'
 
-import { AppProvider } from '../context'
-import theme from '../styles/theme'
+import layout from '~/config/layout'
+import { AppProvider } from '~/context'
+import theme from '~/styles/theme'
 
 const Noop: FC = ({ children }) => <>{children}</>
 
@@ -20,6 +21,9 @@ function MyApp({ Component, pageProps }: AppProps) {
         height={3}
         options={{ showSpinner: false }}
       />
+      <Head>
+        <title>{layout.title}</title>
+      </Head>
       <Layout pageTitle={pageTitle}>
         <Component {...pageProps} />
       </Layout>

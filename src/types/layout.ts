@@ -1,4 +1,5 @@
 import { ElementType } from 'react'
+
 import { Actions, Subjects } from './ability'
 
 type NavItem = {

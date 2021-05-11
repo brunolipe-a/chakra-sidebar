@@ -3,7 +3,7 @@ import {
   useMenuButton,
   useStyles,
   chakra,
-  forwardRef,
+  forwardRef
 } from '@chakra-ui/react'
 
 const StyledMenuButton = forwardRef<MenuButtonProps, 'button'>((props, ref) => {
@@ -18,7 +18,7 @@ const StyledMenuButton = forwardRef<MenuButtonProps, 'button'>((props, ref) => {
         alignItems: 'center',
         outline: 0,
         transition: 'all 250ms',
-        ...styles.button,
+        ...styles.button
       }}
     />
   )

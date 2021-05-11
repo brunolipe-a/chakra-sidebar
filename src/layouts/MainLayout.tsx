@@ -1,15 +1,17 @@
 import { ReactNode } from 'react'
-import Head from 'next/head'
+
 import { Box, BoxProps, Flex } from '@chakra-ui/react'
 
-import { SidebarDrawerProvider } from '../context/SidebarDrawerContext'
+import Head from 'next/head'
 
-import { Header } from '../components/MainLayout/Header'
-import { SideBar } from '../components/MainLayout/SideBar'
+import { LoadingOverlay } from '~/components/LoadingOverlay'
+import { Header } from '~/components/MainLayout/Header'
+import { SideBar } from '~/components/MainLayout/SideBar'
 
-import { useLayout } from '../context/LayoutContext'
-import { LoadingOverlay } from '../components/LoadingOverlay'
-import { useLoadingOverlay } from '../hooks/useLoadingOverlay'
+import { useLoadingOverlay } from '~/hooks/useLoadingOverlay'
+
+import { useLayout } from '~/context/LayoutContext'
+import { SidebarDrawerProvider } from '~/context/SidebarDrawerContext'
 
 interface MainLayoutProps extends BoxProps {
   children: ReactNode

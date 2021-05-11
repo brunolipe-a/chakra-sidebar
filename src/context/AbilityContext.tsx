@@ -1,7 +1,9 @@
 import { createContext } from 'react'
+
 import { Ability } from '@casl/ability'
 import { createContextualCan, useAbility as useCaslAbility } from '@casl/react'
-import { Abilities } from '../types/ability'
+
+import { Abilities } from '~/types/ability'
 
 const ability = new Ability<Abilities>()
 

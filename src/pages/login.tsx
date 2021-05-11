@@ -6,13 +6,14 @@ import {
   Checkbox,
   Link,
   Button,
-  useColorModeValue as mode,
+  useColorModeValue as mode
 } from '@chakra-ui/react'
 
-import { Input } from '../components/Form/Input'
-import { PasswordInput } from '../components/Form/PasswordInput'
-import { useAuth } from '../context/AuthContext'
-import { AuthLayout } from '../layouts/AuthLayout'
+import { Input } from '~/components/Form/Input'
+import { PasswordInput } from '~/components/Form/PasswordInput'
+
+import { useAuth } from '~/context/AuthContext'
+import { AuthLayout } from '~/layouts/AuthLayout'
 
 export default function Login() {
   const { signIn } = useAuth()

@@ -1,6 +1,3 @@
-import Head from 'next/head'
-import { useLayout } from '../context/LayoutContext'
-
 import {
   Flex,
   Box,
@@ -9,18 +6,23 @@ import {
   Stack,
   useColorModeValue,
   chakra,
-  BoxProps,
+  BoxProps
 } from '@chakra-ui/react'
 
-import Shape from '../assets/stacked-steps-haikei.svg'
-import Ilustration from '../assets/Discount-pana.svg'
+import Head from 'next/head'
+
+import Ilustration from '~/assets/Discount-pana.svg'
+import Shape from '~/assets/stacked-steps-haikei.svg'
+
+import { LoadingOverlay } from '~/components/LoadingOverlay'
+import { Logo } from '~/components/Logo'
+
+import { useLoadingOverlay } from '~/hooks/useLoadingOverlay'
+
+import { useLayout } from '~/context/LayoutContext'
 
 const ChakraShape = chakra(Shape)
 const ChakraIlustration = chakra(Ilustration)
-
-import { Logo } from '../components/Logo'
-import { LoadingOverlay } from '../components/LoadingOverlay'
-import { useLoadingOverlay } from '../hooks/useLoadingOverlay'
 
 interface MainLayoutProps extends BoxProps {
   pageTitle?: string
@@ -33,7 +35,7 @@ export function AuthLayout({ children, pageTitle, ...rest }: MainLayoutProps) {
 
   const shouldShowLoading = useLoadingOverlay({
     isGuest: true,
-    redirecURL: dashbordUrl,
+    redirecURL: dashbordUrl
   })
 
   if (shouldShowLoading) {

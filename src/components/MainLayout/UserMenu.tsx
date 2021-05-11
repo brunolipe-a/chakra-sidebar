@@ -1,21 +1,20 @@
+import { memo } from 'react'
+
 import {
   Menu,
   MenuList,
   MenuItem,
   Text,
-  MenuOptionGroup,
-  MenuItemOption,
   MenuDivider,
   Avatar,
   MenuProps,
   useColorModeValue as mode,
-  Stack,
+  Stack
 } from '@chakra-ui/react'
 
-import { MenuButton } from './MenuButton'
+import { useAuth } from '~/context/AuthContext'
 
-import { memo } from 'react'
-import { useAuth } from '../../context/AuthContext'
+import { MenuButton } from './MenuButton'
 
 type UserMenuProps = {
   reverseDir?: boolean
@@ -61,7 +60,7 @@ function UserMenuComponent({
         <Text mb={2} fontWeight="medium">
           {user.email}
         </Text>
-        <MenuOptionGroup defaultValue={user.tenants?.[0].name} type="radio">
+        {/* <MenuOptionGroup defaultValue={user.tenants?.[0].name} type="radio">
           {user.tenants?.map((tenant) => (
             <MenuItemOption
               key={tenant.id}
@@ -72,7 +71,7 @@ function UserMenuComponent({
               {tenant.name}
             </MenuItemOption>
           ))}
-        </MenuOptionGroup>
+        </MenuOptionGroup> */}
         <MenuDivider />
         <MenuItem borderRadius="md" onClick={signOut}>
           Logout

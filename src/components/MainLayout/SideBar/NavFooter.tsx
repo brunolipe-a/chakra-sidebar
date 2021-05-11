@@ -1,6 +1,8 @@
-import { StackProps } from '@chakra-ui/react'
 import { memo } from 'react'
-import { useLayout } from '../../../context/LayoutContext'
+
+import { StackProps } from '@chakra-ui/react'
+
+import { useLayout } from '~/context/LayoutContext'
 
 import { NavItems } from './NavItems'
 

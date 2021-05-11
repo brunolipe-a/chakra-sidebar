@@ -1,8 +1,8 @@
+import { useEffect, useContext, createContext, ReactNode } from 'react'
+
 import { useDisclosure, UseDisclosureReturn } from '@chakra-ui/react'
+
 import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import { useContext } from 'react'
-import { createContext, ReactNode } from 'react'
 
 interface SidebarDrawerProps {
   children: ReactNode
@@ -18,7 +18,7 @@ export function SidebarDrawerProvider({ children }: SidebarDrawerProps) {
 
   useEffect(() => {
     disclosure.onClose()
-  }, [asPath])
+  }, [asPath, disclosure])
 
   return (
     <SidebarDrawerContext.Provider value={disclosure}>

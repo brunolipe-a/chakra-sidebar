@@ -1,3 +1,5 @@
+import { memo } from 'react'
+
 import {
   Drawer,
   DrawerBody,
@@ -7,15 +9,16 @@ import {
   DrawerOverlay,
   Flex,
   useBreakpointValue,
-  useColorModeValue as mode,
+  useColorModeValue as mode
 } from '@chakra-ui/react'
 
-import { UserMenu } from '../../MainLayout/UserMenu'
-import { NavMain } from './NavMain'
+import { UserMenu } from '~/components/MainLayout/UserMenu'
+
+import { useLayout } from '~/context/LayoutContext'
+import { useSidebarDrawer } from '~/context/SidebarDrawerContext'
+
 import { NavFooter } from './NavFooter'
-import { useSidebarDrawer } from '../../../context/SidebarDrawerContext'
-import { useLayout } from '../../../context/LayoutContext'
-import { memo } from 'react'
+import { NavMain } from './NavMain'
 
 function SideBarComponent() {
   const { Logo } = useLayout()
@@ -51,6 +54,7 @@ function SideBarComponent() {
   }
 
   return (
+    // <DarkMode>
     <Flex
       as="aside"
       direction="column"

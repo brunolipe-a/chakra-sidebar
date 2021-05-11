@@ -1,8 +1,9 @@
-import { Stack, StackProps } from '@chakra-ui/react'
 import { memo } from 'react'
-import { Can } from '../../../context/AbilityContext'
 
-import { NavGroupItems } from '../../../types/layout'
+import { Stack, StackProps } from '@chakra-ui/react'
+
+import { Can } from '~/context/AbilityContext'
+import { NavGroupItems } from '~/types/layout'
 
 import { NavGroup } from './NavGroup'
 import { NavLink } from './NavLink'

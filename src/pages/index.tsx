@@ -1,13 +1,14 @@
 import { Text } from '@chakra-ui/react'
-import { MainLayout } from '../layouts/MainLayout'
-import { Can } from '../context/AbilityContext'
+
+import { Can } from '~/context/AbilityContext'
+import { MainLayout } from '~/layouts/MainLayout'
 
 export default function Home() {
   return (
     <>
       <Text>home</Text>
-      <Can I="view" an="Article">
-        <Text>🎉 Eu posso ver! 🎉</Text>
+      <Can I="view" an="cities">
+        <Text>🎉 Eu posso ver as cidades! 🎉</Text>
       </Can>
     </>
   )

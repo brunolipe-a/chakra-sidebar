@@ -1,3 +1,6 @@
+import { forwardRef, ForwardRefRenderFunction, useRef } from 'react'
+import { HiEye, HiEyeOff } from 'react-icons/hi'
+
 import {
   Flex,
   Link,
@@ -11,10 +14,8 @@ import {
   FormLabel,
   FormHelperText,
   FormErrorMessage,
-  useColorModeValue as mode,
+  useColorModeValue as mode
 } from '@chakra-ui/react'
-import { forwardRef, ForwardRefRenderFunction, useRef } from 'react'
-import { HiEye, HiEyeOff } from 'react-icons/hi'
 
 import { InputProps } from './Input'
 

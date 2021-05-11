@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { useContext, createContext, ReactNode } from 'react'
-import { LayoutConfig } from '../types/layout'
+import { useState, useContext, createContext, ReactNode } from 'react'
+
+import { LayoutConfig } from '~/types/layout'
 
 interface LayoutProps {
   children: ReactNode

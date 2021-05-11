@@ -1,14 +1,23 @@
-import { useState } from 'react'
-import { useEffect } from 'react'
-import { useContext, createContext, ReactNode } from 'react'
+import {
+  useState,
+  useEffect,
+  useContext,
+  createContext,
+  ReactNode,
+  useCallback
+} from 'react'
 
-import Router from 'next/router'
-
-import { api } from '../services/api'
-import { UserData } from '../types/auth'
-import { useLayout } from './LayoutContext'
 import { useToast } from '@chakra-ui/react'
-import { Response, User } from '../types'
+
+import { setCookie, parseCookies } from 'nookies'
+
+import { api, centralAPI } from '~/services/api'
+import { Tenant, User } from '~/types'
+import { UserData } from '~/types/auth'
+import { logoutHandler, TOKEN_KEY, setInterceptor } from '~/utils/auth'
+
+import { useAbility } from './AbilityContext'
+import { useLayout } from './LayoutContext'
 
 interface AuthProps {
   children: ReactNode
@@ -18,7 +27,7 @@ type AuthContextData = {
   isAuthenticated: boolean
   isAuthLoading: boolean
   user: User
-  signIn(props: SignInProps): Promise<boolean>
+  signIn: (_props: SignInProps) => Promise<boolean>
   signOut(): Promise<void>
 }
 
@@ -27,51 +36,49 @@ type SignInProps = {
   password: string
 }
 
-const TOKEN_KEY = '@cashgo:token'
-
 const AuthContext = createContext({} as AuthContextData)
 
 export function AuthProvider({ children }: AuthProps) {
   const toast = useToast()
   const { loginUrl } = useLayout()
+  const ability = useAbility()
 
-  const [user, setUser] = useState({} as User)
+  const [user, setUser] = useState({
+    tenants: []
+  } as User)
+
+  const [tenant, setTenant] = useState<Tenant>()
 
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isAuthLoading, setIsAuthLoading] = useState(true)
 
-  useEffect(() => {
-    const token: string = JSON.parse(localStorage.getItem(TOKEN_KEY))
-
-    if (token) {
-      api.defaults.headers.authorization = `Bearer ${token}`
-
-      setIsAuthenticated(true)
-    }
-
-    setTimeout(() => {
-      setIsAuthLoading(false)
-    }, 500)
-  }, [])
-
-  useEffect(() => {
-    if (isAuthenticated && !user.id) {
-      api.get<Response<User>>('me').then(({ data }) => {
-        setUser(data.data)
+  const getUserData = useCallback(() => {
+    centralAPI
+      .get<User>('me')
+      .then(({ data }) => {
+        setUser(data)
+        ability.update(data.permissions)
+        setTenant(data.tenants[0])
       })
-    }
-  }, [isAuthenticated, user])
+      .catch(err => console.error(err))
+  }, [ability])
 
   async function signIn(credentials: SignInProps) {
     try {
-      const { data } = await api.post<UserData>('login', {
+      const { data } = await centralAPI.post<UserData>('login', {
         ...credentials,
-        device_name: 'Chrome',
+        device_name: 'Chrome'
       })
 
+      centralAPI.defaults.headers.authorization = `Bearer ${data.token}`
       api.defaults.headers.authorization = `Bearer ${data.token}`
 
-      localStorage.setItem(TOKEN_KEY, JSON.stringify(data.token))
+      setCookie(undefined, TOKEN_KEY, data.token, {
+        maxAge: 60 * 60 * 24, // 1 day,
+        path: '/'
+      })
+
+      getUserData()
 
       setIsAuthenticated(true)
 
@@ -83,12 +90,10 @@ export function AuthProvider({ children }: AuthProps) {
 
   async function signOut() {
     setIsAuthenticated(false)
+
     setUser({} as User)
-    Router.push(loginUrl)
 
-    await api.delete('logout')
-
-    localStorage.removeItem(TOKEN_KEY)
+    await logoutHandler(loginUrl)
 
     toast({
       title: 'Deslogado',
@@ -96,9 +101,38 @@ export function AuthProvider({ children }: AuthProps) {
       status: 'success',
       position: 'top-right',
       duration: 2000,
-      isClosable: true,
+      isClosable: true
     })
   }
+
+  useEffect(() => {
+    setInterceptor({ api, setAuthenticated: setIsAuthenticated })
+    setInterceptor({ api: centralAPI, setAuthenticated: setIsAuthenticated })
+
+    async function initiateAuth() {
+      const token = parseCookies()[TOKEN_KEY]
+
+      if (token) {
+        centralAPI.defaults.headers.authorization = `Bearer ${token}`
+        api.defaults.headers.authorization = `Bearer ${token}`
+
+        setIsAuthenticated(true)
+        getUserData()
+      }
+
+      setTimeout(() => {
+        setIsAuthLoading(false)
+      }, 500)
+    }
+
+    initiateAuth()
+  }, [getUserData])
+
+  useEffect(() => {
+    if (tenant) {
+      api.defaults.baseURL = `${centralAPI.defaults.baseURL}/${tenant.id}`
+    }
+  }, [tenant])
 
   return (
     <AuthContext.Provider
@@ -107,7 +141,7 @@ export function AuthProvider({ children }: AuthProps) {
         isAuthLoading,
         isAuthenticated,
         signIn,
-        signOut,
+        signOut
       }}
     >
       {children}
